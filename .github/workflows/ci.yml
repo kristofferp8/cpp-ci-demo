@@ -18,25 +18,18 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y cmake g++ lcov
 
     - name: Configure CMake
-      run: cmake -S . -B build
+      run: cmake -S . -B build -DCMAKE_CXX_STANDARD=17 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
     - name: Build
       run: cmake --build build
 
-    - name: Run tests and export JUnit
+    - name: Run tests and export JUnit XML
       run: |
-       mkdir -p test-results
-       ./build/test_runner --reporter junit --out test-restults/results.xml
+        mkdir -p build/test-results
+        ./build/test_runner --reporter junit --out build/test-results/test-results.xml
 
     - name: Upload test results
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v3
       with:
         name: test-results
-        path: test-results/results.xml
-
-    - name: Publish Test Report
-      uses: dorny/test-reporter@v1
-      with:
-        name: Catch2 Tests
-        path: test-resuts/results.xml
-        reporter: junit
+        path: build/test-results/test-results.xml
