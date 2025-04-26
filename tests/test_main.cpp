@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 #include "../external/catch.hpp"
 
+// argc
 int main(int argc, char* argv[]) {
 	Catch::Session session;
 
