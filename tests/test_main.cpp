@@ -1,9 +1,11 @@
-#include <cassert>
+#define CATCH_CONFIG_RUNNER
+#include "../external/catch.hpp"
 
-int add(int, int); // Function declaration
+int main(int argc, char* argv[]) {
+	Catch::Session session;
 
-int main() {
-    assert(add(2, 3) == 5);
-    assert(add(-1, 1) == 0);
-    return 0;
+	const char* customArgs[] = { argv[0], "--success" };
+	int fakeArgc = sizeof(customArgs) / sizeof(customArgs[0]);
+
+	return session.run(fakeArgc, const_cast<char**>(customArgs));
 }

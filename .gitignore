@@ -1,0 +1,14 @@
+# Ignorera VS och byggfiler
+.vs/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+out/
+*.pdb
+*.obj
+*.exe
+*.ilk
+*.user
+*.log
