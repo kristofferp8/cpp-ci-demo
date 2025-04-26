@@ -23,5 +23,20 @@ jobs:
     - name: Build
       run: cmake --build build
 
-    - name: Run tests
-      run: ./build/test_runner
+    - name: Run tests and export JUnit
+      run: |
+       mkdir -p test-results
+       ./build/test_runner --reporter junit --out test-restults/results.xml
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: test-results/results.xml
+
+    - name: Publish Test Report
+      uses: dorny/test-reporter@v1
+      with:
+        name: Catch2 Tests
+        path: test-resuts/results.xml
+        reporter: junit

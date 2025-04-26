@@ -9,7 +9,7 @@ TEST_CASE("RPM_Signal ignores negative values", "[RPM_Signal]") {
 	REQUIRE(rpm.getValue() == Approx(800.0));
 
 	rpm.update(1000.0);
-	REQUIRE(rpm.getValue() == Approx(1000.0));
+	REQUIRE(rpm.getValue() == Approx(2000.0));
 
 	rpm.update(-100.0);
 	REQUIRE(rpm.getValue() == Approx(1000.0));
